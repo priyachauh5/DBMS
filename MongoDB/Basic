@@ -1,0 +1,855 @@
+Microsoft Windows [Version 10.0.19045.5011]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dell>mongosh
+Current Mongosh Log ID: 67274cc0260af0779716c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.3.3 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-10-30T00:51:41.131+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+Blogging       76.00 KiB
+TestDB         72.00 KiB
+admin          40.00 KiB
+amazon         72.00 KiB
+config        108.00 KiB
+fakewhatsapp   72.00 KiB
+local          88.00 KiB
+relationDemo  328.00 KiB
+test           68.00 KiB
+wanderlust    264.00 KiB
+whatsapp       72.00 KiB
+test> db.createCollection("student")
+{ ok: 1 }
+test> show dbs
+Blogging       76.00 KiB
+TestDB         72.00 KiB
+admin          40.00 KiB
+amazon         72.00 KiB
+config        108.00 KiB
+fakewhatsapp   72.00 KiB
+local          88.00 KiB
+relationDemo  328.00 KiB
+test           76.00 KiB
+wanderlust    264.00 KiB
+whatsapp       72.00 KiB
+
+test> db.student.insertMany({'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'},{'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+test> db.student.insertMany({'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'},{'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'})
+test> db.student.insertMany({'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'},{'roll_no':2,'name':'ruchi','email':'xyz@gmail.com','age':22,'Div':'A','class':'TE'},{'roll_no':3,'name':'saloni','email':'sty@gmail.com','age':21,'Div':'B','Class':'TE'},{'roll_no':4,'name':'preeti','email':'ght@gmail.com','age':22,'Div':'B','Class':'TE'},{'roll_no':5,'name':'rahul','email':'rty@gmail.com','age':21,'Div':'B','Class':'TE'},{'roll_no':6,'name':'shena','email':'gty@gmail.com','age':20,'Div':'C','Class':'TE'},)
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+test> db.student.insert({'roll_no':1,'name':'priya','email':'abc@gmail.com','age':20,'Div':'A','Class':'TE'})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('672753b2260af0779716c9b5') }
+}
+test> db.student.insert({'roll_no':2,'name':'shena','email':'xyz@gmail.com','age':21,'Div':'A','Class':'TE'})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('672753d2260af0779716c9b6') }
+}
+test> db.student.insert({'roll_no':3,'name':'rohan','email':'rgt@gmail.com','age':21,'Div':'B','Class':'TE'})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('672753fa260af0779716c9b7') }
+}
+test> db.student.insert({'roll_no':4,'name':'ruchi','email':'sdr@gmail.com','age':20,'Div':'B','Class':'TE'})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('6727541c260af0779716c9b8') }
+}
+
+test> db.student.insert({'roll_no':5,'name':'saloni','email':'sdr@gmail.com','age':20,'Div':'C','Class':'TE'})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67275460260af0779716c9b9') }
+}
+test> db.student.insert({'roll_no':6,'name':'kartik','email':'edg@gmail.com','age':22,'Div':'C','Class':'TE'})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67275487260af0779716c9ba') }
+}
+test> db.student.find()
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275487260af0779716c9ba'),
+    roll_no: 6,
+    name: 'kartik',
+    email: 'edg@gmail.com',
+    age: 22,
+    Div: 'C',
+    Class: 'TE'
+  }
+]
+
+
+test> db.student.update({'email':'sdr@gmail.com'},{$set:{'email':'qwe@gmail.com'}})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> db.student.find()
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275487260af0779716c9ba'),
+    roll_no: 6,
+    name: 'kartik',
+    email: 'edg@gmail.com',
+    age: 22,
+    Div: 'C',
+    Class: 'TE'
+  }
+]
+
+
+test> db.student.delete({'name':'Kartik'})
+TypeError: db.student.delete is not a function
+test> db.student.deleteOne({'roll_no':6})
+{ acknowledged: true, deletedCount: 1 }
+test> db.student.find()
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  }
+]
+
+test> db.student.find().sort({'name':'priya'})
+MongoInvalidArgumentError: Invalid sort direction: "priya"
+test> db.student.find().sort({'name':1})
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  }
+]
+
+test> db.student.find().sort({'name':-1})
+[
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  }
+]
+student> show collections
+switched to db student
+student> db.student.find()
+
+student> exit
+
+C:\Users\dell>mongosh
+Current Mongosh Log ID: 67275f6ac0a8aff51716c9b4
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3
+Using MongoDB:          7.0.8
+Using Mongosh:          2.2.3
+mongosh 2.3.3 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-10-30T00:51:41.131+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.student.find()
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  }
+]
+
+
+test> db.student.find({age:{$lte:20}}).explain()
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'test.student',
+    indexFilterSet: false,
+    parsedQuery: { age: { '$lte': 20 } },
+    queryHash: 'D3AD2547',
+    planCacheKey: 'D3AD2547',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'COLLSCAN',
+      filter: { age: { '$lte': 20 } },
+      direction: 'forward'
+    },
+    rejectedPlans: []
+  },
+  command: { find: 'student', filter: { age: { '$lte': 20 } }, '$db': 'test' },
+  serverInfo: {
+    host: 'DESKTOP-DG4J4U1',
+    port: 27017,
+    version: '7.0.8',
+    gitVersion: 'c5d33e55ba38d98e2f48765ec4e55338d67a4a64'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted'
+  },
+  ok: 1
+}
+
+test> db.student.find({age:{$lte:20}}).explain('executionStats')
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'test.student',
+    indexFilterSet: false,
+    parsedQuery: { age: { '$lte': 20 } },
+    queryHash: 'D3AD2547',
+    planCacheKey: 'D3AD2547',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'COLLSCAN',
+      filter: { age: { '$lte': 20 } },
+      direction: 'forward'
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 3,
+    executionTimeMillis: 0,
+    totalKeysExamined: 0,
+    totalDocsExamined: 5,
+    executionStages: {
+      stage: 'COLLSCAN',
+      filter: { age: { '$lte': 20 } },
+      nReturned: 3,
+      executionTimeMillisEstimate: 0,
+      works: 6,
+      advanced: 3,
+      needTime: 2,
+      needYield: 0,
+      saveState: 0,
+      restoreState: 0,
+      isEOF: 1,
+      direction: 'forward',
+      docsExamined: 5
+    }
+  },
+  command: { find: 'student', filter: { age: { '$lte': 20 } }, '$db': 'test' },
+  serverInfo: {
+    host: 'DESKTOP-DG4J4U1',
+    port: 27017,
+    version: '7.0.8',
+    gitVersion: 'c5d33e55ba38d98e2f48765ec4e55338d67a4a64'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted'
+  },
+  ok: 1
+}
+test> db.student.createIndex({'age':1})
+age_1
+test> db.student.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { age: 1 }, name: 'age_1' }
+]
+test> db.student.dropIndex()
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 0 (Collection.dropIndex)
+test> db.student.dropIndex('age_1')
+{ nIndexesWas: 2, ok: 1 }
+test> db.student.createIndex({'age':1})
+age_1
+test> db.student.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { age: 1 }, name: 'age_1' }
+]
+test> db.student.find({age:{$lte:20}}).explain('executionStats')
+{
+  explainVersion: '1',
+  queryPlanner: {
+    namespace: 'test.student',
+    indexFilterSet: false,
+    parsedQuery: { age: { '$lte': 20 } },
+    queryHash: 'D3AD2547',
+    planCacheKey: '0A22BCC8',
+    maxIndexedOrSolutionsReached: false,
+    maxIndexedAndSolutionsReached: false,
+    maxScansToExplodeReached: false,
+    winningPlan: {
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { age: 1 },
+        indexName: 'age_1',
+        isMultiKey: false,
+        multiKeyPaths: { age: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { age: [ '[-inf.0, 20]' ] }
+      }
+    },
+    rejectedPlans: []
+  },
+  executionStats: {
+    executionSuccess: true,
+    nReturned: 3,
+    executionTimeMillis: 36,
+    totalKeysExamined: 3,
+    totalDocsExamined: 3,
+    executionStages: {
+      stage: 'FETCH',
+      nReturned: 3,
+      executionTimeMillisEstimate: 36,
+      works: 4,
+      advanced: 3,
+      needTime: 0,
+      needYield: 0,
+      saveState: 1,
+      restoreState: 1,
+      isEOF: 1,
+      docsExamined: 3,
+      alreadyHasObj: 0,
+      inputStage: {
+        stage: 'IXSCAN',
+        nReturned: 3,
+        executionTimeMillisEstimate: 36,
+        works: 4,
+        advanced: 3,
+        needTime: 0,
+        needYield: 0,
+        saveState: 1,
+        restoreState: 1,
+        isEOF: 1,
+        keyPattern: { age: 1 },
+        indexName: 'age_1',
+        isMultiKey: false,
+        multiKeyPaths: { age: [] },
+        isUnique: false,
+        isSparse: false,
+        isPartial: false,
+        indexVersion: 2,
+        direction: 'forward',
+        indexBounds: { age: [ '[-inf.0, 20]' ] },
+        keysExamined: 3,
+        seeks: 1,
+        dupsTested: 0,
+        dupsDropped: 0
+      }
+    }
+  },
+  command: { find: 'student', filter: { age: { '$lte': 20 } }, '$db': 'test' },
+  serverInfo: {
+    host: 'DESKTOP-DG4J4U1',
+    port: 27017,
+    version: '7.0.8',
+    gitVersion: 'c5d33e55ba38d98e2f48765ec4e55338d67a4a64'
+  },
+  serverParameters: {
+    internalQueryFacetBufferSizeBytes: 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes: 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes: 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes: 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes: 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS: 0,
+    internalQueryMaxAddToSetBytes: 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes: 104857600,
+    internalQueryFrameworkControl: 'trySbeRestricted'
+  },
+  ok: 1
+}
+test> db.student.dropIndex('age_1')
+{ nIndexesWas: 2, ok: 1 }
+test> db.student.createIndex({'age':1, 'name':1})
+age_1_name_1
+test> db.student.find({age:{$gte:20},'name':'priya'}).expalin("executionStats")
+TypeError: db.student.fin ... iya'}).expalin is not a function
+test> db.student.find({age:{$gte:20},name:'priya'}).expalin("executionStats")
+TypeError: db.student.fin ... iya'}).expalin is not a function
+test> db.student.find({age:{$gte:20},name:'priya'}).expalin("executionStats")
+TypeError: db.student.fin ... iya'}).expalin is not a function
+test> db.student.find({age:{$gte:20},name:"priya"}).expalin("executionStats")
+TypeError: db.student.fin ... iya"}).expalin is not a function
+test> db.student.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { age: 1, name: 1 }, name: 'age_1_name_1' }
+]
+test> db.student.aggregate([{$match:{gender:"male"}}])
+
+test> db.student.aggregate([{$group:{_id:"$age"}}])
+[ { _id: 20 }, { _id: 21 } ]
+test> db.student.aggregate([{$group:{_id:"$age", roll_no:{$push:"$roll_no"}}}] )
+[ { _id: 20, roll_no: [ 1, 4, 5 ] }, { _id: 21, roll_no: [ 2, 3 ] } ]
+test> db.student.aggregate([{$group:{_id:"$age", pooraDoc:{$push:"$gender"}}}])
+[ { _id: 20, pooraDoc: [] }, { _id: 21, pooraDoc: [] } ]
+test> db.student.aggregate([{$group:{_id:"$age", pooraDoc:{$push:"$$ROOT"}}}])
+[
+  {
+    _id: 20,
+    pooraDoc: [
+      {
+        _id: ObjectId('672753b2260af0779716c9b5'),
+        roll_no: 1,
+        name: 'priya',
+        email: 'abc@gmail.com',
+        age: 20,
+        Div: 'A',
+        Class: 'TE'
+test>
+      {
+        _id: ObjectId('6727541c260af0779716c9b8'),
+        roll_no: 4,
+        name: 'ruchi',
+        email: 'qwe@gmail.com',
+        age: 20,
+        Div: 'B',
+        Class: 'TE'
+      },
+      {
+        _id: ObjectId('67275460260af0779716c9b9'),
+        roll_no: 5,
+        name: 'saloni',
+        email: 'sdr@gmail.com',
+        age: 20,
+        Div: 'C',
+        Class: 'TE'
+      }
+    ]
+  },
+  {
+    _id: 21,
+    pooraDoc: [
+      {
+        _id: ObjectId('672753d2260af0779716c9b6'),
+        roll_no: 2,
+        name: 'shena',
+        email: 'xyz@gmail.com',
+        age: 21,
+        Div: 'A',
+        Class: 'TE'
+      },
+      {
+        _id: ObjectId('672753fa260af0779716c9b7'),
+        roll_no: 3,
+        name: 'rohan',
+        email: 'rgt@gmail.com',
+        age: 21,
+        Div: 'B',
+        Class: 'TE'
+      }
+    ]
+  }
+]
+test> db.student.aggregate([{$match: {gender:"male"}},{$group:{_id:"age", countOfStudentInThisAgeGroup:{$sum: 1}}}]) //No gender is present in collection
+
+test> db.student.aggregate([{$match: {"roll_no":1}},{$group:{_id:"age", countOfStudentInThisAgeGroup:{$sum: 1}}}])
+[ { _id: 'age', countOfStudentInThisAgeGroup: 1 } ]
+test> db.student.aggregate([{$match: {"roll_no":1}},{$group:{_id:"$age", countOfStudentInThisAgeGroup:{$sum: 1}}}])
+[ { _id: 20, countOfStudentInThisAgeGroup: 1 } ]
+
+ntInThisAgeGroup:{$sum: 1}}}, {$sort:{countOfStudentInThisAgeGroup:-1}}]) //we must create pipeline as much we can
+[ { _id: 20, countOfStudentInThisAgeGroup: 1 } ]
+test> db.student.aggregate([{$group:{_id:"$age",hobbies:{$push:"$Hobbies"}}}]) //No hobbies
+[ { _id: 20, hobbies: [] }, { _id: 21, hobbies: [] } ]
+test> db.student.aggregate([{$group:{_id:null, averageAge:{$avg:"$age"}}}])
+[ { _id: null, averageAge: 20.4 } ]
+
+test> db.student.aggregate([{$unwind:"$email"},{$group:{_id:null, allEmail:{$push:"$email"}}}])
+[
+  {
+    _id: null,
+    allEmail: [
+      'abc@gmail.com',
+      'xyz@gmail.com',
+      'rgt@gmail.com',
+      'qwe@gmail.com',
+      'sdr@gmail.com'
+    ]
+  }
+]
+
+test> db.student.aggregate([{$group: {"_id":"$name", totalAge:{$sum: "$age"}}}])
+[
+  { _id: 'shena', totalAge: 21 },
+  { _id: 'rohan', totalAge: 21 },
+  { _id: 'saloni', totalAge: 20 },
+  { _id: 'priya', totalAge: 20 },
+  { _id: 'ruchi', totalAge: 20 }
+]
+test> db.student.aggregate([{$group: {"_id":"$name", totalMarks:{$sum: "$marks"}}}])
+[
+  { _id: 'shena', totalMarks: 0 },
+  { _id: 'rohan', totalMarks: 0 },
+  { _id: 'saloni', totalMarks: 0 },
+  { _id: 'priya', totalMarks: 0 },
+  { _id: 'ruchi', totalMarks: 0 }
+]
+
+test> db.student.find().pretty()
+[
+  {
+    _id: ObjectId('672753b2260af0779716c9b5'),
+    roll_no: 1,
+    name: 'priya',
+    email: 'abc@gmail.com',
+    age: 20,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753d2260af0779716c9b6'),
+    roll_no: 2,
+    name: 'shena',
+    email: 'xyz@gmail.com',
+    age: 21,
+    Div: 'A',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('672753fa260af0779716c9b7'),
+    roll_no: 3,
+    name: 'rohan',
+    email: 'rgt@gmail.com',
+    age: 21,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('6727541c260af0779716c9b8'),
+    roll_no: 4,
+    name: 'ruchi',
+    email: 'qwe@gmail.com',
+    age: 20,
+    Div: 'B',
+    Class: 'TE'
+  },
+  {
+    _id: ObjectId('67275460260af0779716c9b9'),
+    roll_no: 5,
+    name: 'saloni',
+    email: 'sdr@gmail.com',   
+    age: 20,
+    Div: 'C',
+    Class: 'TE'
+  }
+]
+
+test> db.student.aggregate([{$group: {_id:"$gender", TotalAge:{$sum: 1}}}]) //plz make gender and marks data in collection
+[ { _id: null, TotalAge: 5 } ]
+
+test> db.student.aggregate([{$group: {_id:"$gender", maxAge:{$max: "$age"}}}])
+[ { _id: null, maxAge: 21 } ]
+
+test> db.student.aggregate([{$group: {_id:"$gender", minAge:{$min: "$age"}}}])
+[ { _id: null, minAge: 20 } ]
+
+test> db.student.aggregate([{$group: {_id:"$gender", average:{$avg: "$age"}}}])
+[ { _id: null, average: 20.4 } ]
+
+
+//Practical 11
+test> var map=function(){emit(this.Div,this.age)}
+
+test> var reduce=function(key,values){return Array.sum(values)}
+
+test> db.student.mapReduce(map, reduce, {out: "resultCollection"})
+{ result: 'resultCollection', ok: 1 }
+test> db.resultCollection.find()
+[
+  { _id: 'C', value: 20 },
+  { _id: 'A', value: 41 },
+  { _id: 'B', value: 41 }
+]
+
+test> db.student.mapReduce(function(){emit(this.Div,this.age)}, function(key,values){return Array.avg(values)},{query:{age:{$gt:20}},out:'Result2_mapreduce'})
+{ result: 'Result2_mapreduce', ok: 1 }
+test> db.Result2_mapreduce.find()
+[ { _id: 'B', value: 21 }, { _id: 'A', value: 21 } ]
+

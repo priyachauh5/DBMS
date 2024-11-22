@@ -1,0 +1,184 @@
+/* PRACTICAL 2(PART 1)*/
+
+CREATE DATABASE torism;
+
+use tourism;
+
+CREATE TABLE users(
+	user_id int PRIMARY KEY,
+    name varchar(20),
+    age int,
+    user_email varchar(20),
+    city varchar(20));
+    
+INSERT INTO users
+VALUES
+(1, 'Priya', 20, 'priya@gmail.com', 'Pune'),
+(2, 'Sonali', 20, 'sonali@gmail.com', 'Nagpur'),
+(3, 'Praharsha', 20, 'praharsha@gmail.com', 'Mumbai'),
+(4, 'Sam', 21, 'sam@gmail.com','Nashik'),
+(5, 'Rohan', 19, 'rohan@gmail.com','Kolhapur');
+
+SELECT *FROM users;
+
+CREATE TABLE bookings(
+	name varchar(20) PRIMARY KEY,
+    age int,
+    user_email varchar(20),
+    user_id int,
+    city varchar(20),
+    price int,
+    FOREIGN KEY(user_id) REFERENCES users(user_id));
+    
+INSERT INTO bookings
+VALUES
+('Priya', 20, 'priya@gmail.com',1,'Pune', 2000),
+('Sonali', 20, 'sonali@gmail.com',2,'Nagpur', 1800),
+('Praharsha', 20, 'praharsha@gmail.com', 3,'Mumbai',  1850),
+('Sam', 21, 'sam@gmail.com',4,'Nashik', 1600),
+('Rohan', 19, 'rohan@gmail.com',5, 'Kolhapur', 1600);
+
+SELECT *FROM booking;
+
+CREATE VIEW tourism_view1 AS
+SELECT name,user_id,user_email,age,city
+FROM users
+where age=20;
+
+SELECT *FROM tourism_view1;
+
+CREATE INDEX tourism_index1 ON bookings(user_id,name,user_email);
+
+CREATE INDEX tourism_index2 ON bookings(user_id,name,user_email,price);
+
+SHOW INDEX FROM bookings;
+
+CREATE synonym Synonym1 for users;  //auto increment table is needed
+
+CREATE TABLE student(
+	student_id int auto_increment,
+    name varchar(20),
+    age int,
+    user_id int,
+    PRIMARY KEY (student_id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id));
+    
+call sys.create_synonym_db('name','Synonyms');
+
+CREATE SYNONYM tourism  
+FOR Server1.GFG.Geeeksh.Geektab;  
+GO
+
+SELECT ID, Name    
+FROM Geektable;
+
+SELECT user_id, name    
+FROM users;
+
+Show databases;
+use tourism;
+SELECT *FROM users;
+SELECT *FROM booking;
+
+/* PRACTICAL 2 (PART-2)*/
+
+UPDATE users
+SET city='Satara',name='Priya'
+WHERE user_id=1;
+
+SELECT *FROM users;
+
+ALTER TABLE users
+CHANGE COLUMN age user_age int;
+
+SELECT *FROM users;
+
+SELECT name,user_id
+FROM users
+WHERE user_age=20 && city='Satara';
+
+SELECT name,user_id
+FROM users
+WHERE user_age=20 OR city='Satara';
+
+SELECT name,user_id
+FROM users
+WHERE NOT city='Satara';
+
+//No. of columns should be same
+SELECT *FROM users  
+UNION
+SELECT *FROM bookings;
+
+SELECT *users  
+UNION ALL
+SELECT *bookings;
+
+SELECT *FROM users  
+INTERSECT
+SELECT *FROM bookings;
+
+SELECT *FROM users  
+MINUS
+SELECT *FROM bookings;
+
+SELECT * FROM users
+CROSS JOIN bookings;
+
+//subquery
+SELECT name, user_email, city
+FROM users
+WHERE user_age=20(SELECT name FROM bookings WHERE age=20);
+
+CREATE VIEW tor_view AS
+SELECT name, user_email, city
+FROM users
+WHERE user_age=20;
+
+SELECT *FROM tor_view;
+
+desc users;
+
+/*PRACTICAL 3*/
+
+SELECT *FROM users AS a
+INNER JOIN bookings AS b
+ON a.user_id=b.user_id;
+
+SELECT users.name, bookings.user_email, bookings.price
+FROM users
+INNER JOIN bookings ON users.user_id=bookings.user_id;
+
+SELECT users.name, bookings.user_email, users.city
+FROM users
+JOIN bookings ON users.user_id=bookings.user_id;
+
+SELECT users.name, bookings.user_email, users.city
+FROM users
+LEFT JOIN bookings ON users.user_id=bookings.user_id;
+
+SELECT users.name, bookings.user_email, users.city
+FROM users
+RIGHT JOIN bookings ON users.user_id=bookings.user_id;
+
+SELECT users.name, bookings.user_email, users.city
+FROM users
+FULL JOIN bookings ON users.user_id=bookings.user_id;
+
+/*Subquery= It is also known as when we use more Select statement in one query: WHERE, SELECT, FORM
+single row subquery*/
+
+SELECT *from users
+WHERE city=(SELECT name 
+FROM bookings
+WHERE city='Pune');
+
+
+
+
+
+
+
+
+
+    
